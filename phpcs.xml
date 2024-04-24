@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset name="Helsingborg PHP Coding Standards">
+    <file>./src</file>
+    <rule ref="Hbg-WordPress"></rule>
+    
+    <!-- Do not require class comments for tests -->
+    <rule ref="Squiz.Commenting.ClassComment.Missing">
+        <exclude-pattern>./src/*/*\.test\.php$</exclude-pattern>
+    </rule>
+
+    <!-- Do not require function comments for tests -->
+    <rule ref="Squiz.Commenting.FunctionComment.Missing">
+        <exclude-pattern>./src/*/*\.test\.php$</exclude-pattern>
+    </rule>
+
+    <!-- exclude rule -->
+    <rule ref="WordPress.Security.EscapeOutput.ExceptionNotEscaped">
+        <exclude-pattern>./src/*/*\.php$</exclude-pattern>
+    </rule>
+
+</ruleset>
