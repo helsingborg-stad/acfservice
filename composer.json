@@ -1,5 +1,5 @@
 {
-    "name": "helsingborg-stad/acfervice",
+    "name": "helsingborg-stad/acfservice",
     "description": "Simplifies ACF integration by providing a centralized AcfService that exposes global ACF functions in a streamlined manner. Simplify your development workflow and enhance ACF integration with ease.",
     "license": "MIT",
     "autoload": {
