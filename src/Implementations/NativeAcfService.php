@@ -53,4 +53,28 @@ class NativeAcfService implements AcfService
     {
         acf_form_head();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function form(): void
+    {
+        acf_form();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFieldGroups(array $args = []): array
+    {
+        return acf_get_field_groups($args);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function enqueueUploader(): void
+    {
+        acf_enqueue_uploader();
+    }
 }
