@@ -57,9 +57,9 @@ class NativeAcfService implements AcfService
     /**
      * @inheritDoc
      */
-    public function form(): void
+    public function form(string|array $settings = []): void
     {
-        acf_form();
+        acf_form($settings);
     }
 
     /**
