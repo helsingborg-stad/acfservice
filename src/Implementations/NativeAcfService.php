@@ -45,4 +45,12 @@ class NativeAcfService implements AcfService
     {
         acf_render_field_setting($field, $configuration, $global);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function formHead(): void
+    {
+        acf_form_head();
+    }
 }
