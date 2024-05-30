@@ -77,4 +77,12 @@ class NativeAcfService implements AcfService
     {
         acf_enqueue_uploader();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function addLocalFieldGroup(array $fieldGroup): bool
+    {
+        return acf_add_local_field_group($fieldGroup);
+    }
 }
