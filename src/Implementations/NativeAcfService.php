@@ -25,7 +25,7 @@ class NativeAcfService implements AcfService
     /**
      * @inheritDoc
      */
-    public function getFields(mixed $postId = false, bool $formatValue = true, bool $escapeHtml = false): array
+    public function getFields(mixed $postId = false, bool $formatValue = true, bool $escapeHtml = false): array|false
     {
         return get_fields($postId, $formatValue, $escapeHtml);
     }
