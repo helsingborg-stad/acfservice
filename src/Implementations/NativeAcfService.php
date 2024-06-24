@@ -85,4 +85,12 @@ class NativeAcfService implements AcfService
     {
         return acf_add_local_field_group($fieldGroup);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function updateField(string $selector, mixed $value, mixed $postId = false): bool
+    {
+        return update_field($selector, $value, $postId);
+    }
 }
