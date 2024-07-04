@@ -11,7 +11,10 @@ class FakeAcfServiceTest extends TestCase
      */
     public function testGetFieldWithRequiredValue()
     {
-        $fakeAcfService = new FakeAcfService(['getField' => [123 => ['testSelector' => 'testValue']]]);
+        $returnCallback = fn ($selector, $postId) =>
+            $postId === 123 && $selector === 'testSelector' ? 'testValue' : null;
+
+        $fakeAcfService = new FakeAcfService(['getField' => $returnCallback]);
 
         $result = $fakeAcfService->getField('testSelector', 123);
 
@@ -37,7 +40,8 @@ class FakeAcfServiceTest extends TestCase
      */
     public function testGetFieldWithoutPostId()
     {
-        $fakeAcfService = new FakeAcfService(['getField' => ['testSelector' => 'testValue']]);
+        $returnCallback = fn ($selector) => $selector === 'testSelector' ? 'testValue' : null;
+        $fakeAcfService = new FakeAcfService(['getField' => $returnCallback]);
 
         $result = $fakeAcfService->getField('testSelector');
 
@@ -50,7 +54,8 @@ class FakeAcfServiceTest extends TestCase
      */
     public function testGetFields()
     {
-        $fakeAcfService = new FakeAcfService(['getFields' => [123 => ['testValue']]]);
+        $returnCallback = fn ($postId) => $postId === 123 ? ['testValue'] : [];
+        $fakeAcfService = new FakeAcfService(['getFields' => $returnCallback]);
 
         $result = $fakeAcfService->getFields(123);
 
