@@ -57,6 +57,71 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## Using AcfService in tests
+To make it easier when testing code that depends on the AcfService or parts of it, a FakeAcfService implementation is available.
+This implementation is useful when you want to test your code without having to rely on the ACF functions.
+
+### Example
+Consider that you have the following class that utilizes a part of the AcfService:
+
+```php
+use AcfService\Contracts\GetFields;
+
+class MyService
+{
+    public function __construct(private GetFields $acfService)
+    {
+    }
+
+    public function getFields(): int
+    {
+        return $this->acfService->getFields();
+    }
+}
+```
+
+You can then use FakeAcfService in your tests to fake the results of the AcfService as well as verifying the calls made to the AcfService functions:
+
+```php
+use AcfService\Implementations\FakeAcfService;
+use PHPUnit\Framework\TestCase;
+
+class MyServiceTest extends TestCase
+{
+    public function testGetFields()
+    {
+        // Given
+        $fakeAcfService = new FakeAcfService(['getFields' => ['fieldName' => 'fieldValue']]);
+        $myService = new MyService($fakeAcfService);
+
+        // When
+        $fields = $myService->getFields();
+
+        // Then
+        $this->assertEquals([], $acfService->methodCalls['getFields'][0]);
+        $this->assertEquals(['fieldName' => 'fieldValue'], $fields);
+    }
+}
+```
+
+### Passing return values to the FakeAcfService
+
+The FakeAcfService constructor accepts an array of key-value pairs where the key is the name of the method and the value is the return value of the method.
+
+```php
+# Using a generic return value for all calls to the method.
+$fakeAcfService = new FakeAcfService(['getFields' => ['field' => 'value']]);
+$fakeAcfService->getFields(); // Returns ['field' => 'value']
+$fakeAcfService->getFields(321); // Returns ['field' => 'value']
+$fakeAcfService->getFields(123); // Returns ['field' => 'value']
+
+# Using a specific return value based on what is passed to the function for a specific call to the method.
+$fakeAcfService = new FakeAcfService(['getFields' => [123 => ['field' => 'value']]]);
+$fakeAcfService->getFields(); // Returns false
+$fakeAcfService->getFields(321); // Returns false
+$fakeAcfService->getFields(123); // Returns ['field' => 'value']
+```
+
 ## License
 
 Distributed under the [MIT License][license-url].
