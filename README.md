@@ -115,8 +115,9 @@ $fakeAcfService->getFields(); // Returns ['field' => 'value']
 $fakeAcfService->getFields(321); // Returns ['field' => 'value']
 $fakeAcfService->getFields(123); // Returns ['field' => 'value']
 
-# Using a specific return value based on what is passed to the function for a specific call to the method.
-$fakeAcfService = new FakeAcfService(['getFields' => [123 => ['field' => 'value']]]);
+# Using a callback to determine the return value based on the arguments passed to the method.
+$return         = fn($postId) => $postId === 123 ? ['field' => 'value'] : [];
+$fakeAcfService = new FakeAcfService(['getFields' => $return]);
 $fakeAcfService->getFields(); // Returns false
 $fakeAcfService->getFields(321); // Returns false
 $fakeAcfService->getFields(123); // Returns ['field' => 'value']

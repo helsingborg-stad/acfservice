@@ -37,6 +37,27 @@ class FakeAcfService implements AcfService
     }
 
     /**
+     * Retrieves the return value for a given method.
+     *
+     * @param string $method The name of the method.
+     * @param array $methodArgs The arguments to be passed to the method.
+     * @param mixed $default The default value to return if the method does not have a return value.
+     * @return mixed The return value of the method, or the default value if the method does not have a return value.
+     */
+    private function getReturnValue($method, array $methodArgs = [], $default = null): mixed
+    {
+        if (!isset($this->returnValues[$method])) {
+            return $default;
+        }
+
+        if (is_callable($this->returnValues[$method])) {
+            return $this->returnValues[$method](...$methodArgs);
+        }
+
+        return $this->returnValues[$method] ?? $default;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getField(
@@ -46,11 +67,7 @@ class FakeAcfService implements AcfService
         bool $escapeHtml = false
     ) {
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
-        return
-            $this->returnValues[__FUNCTION__][$postId][$selector] ??
-            $this->returnValues[__FUNCTION__][$selector] ??
-            $this->returnValues[__FUNCTION__] ??
-            false;
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), false);
     }
 
     /**
@@ -59,10 +76,7 @@ class FakeAcfService implements AcfService
     public function getFields(mixed $postId = false, bool $formatValue = true, bool $escapeHtml = false): array|false
     {
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
-        return
-            $this->returnValues[__FUNCTION__][$postId ?: null] ??
-            $this->returnValues[__FUNCTION__] ??
-            false;
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), false);
     }
 
     /**
@@ -103,7 +117,7 @@ class FakeAcfService implements AcfService
     public function getFieldGroups(array $args = []): array
     {
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
-        return $this->returnValues[__FUNCTION__] ?? [];
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), []);
     }
 
     /**
@@ -120,7 +134,7 @@ class FakeAcfService implements AcfService
     public function addLocalFieldGroup(array $fieldGroup): bool
     {
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
-        return $this->returnValues[__FUNCTION__] ?? [];
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), []);
     }
 
     /**
@@ -129,6 +143,6 @@ class FakeAcfService implements AcfService
     public function updateField(string $selector, mixed $value, mixed $postId = false): bool
     {
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
-        return $this->returnValues[__FUNCTION__] ?? [];
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), []);
     }
 }
