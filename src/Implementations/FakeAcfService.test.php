@@ -92,7 +92,10 @@ class FakeAcfServiceTest extends TestCase
 
         $fakeAcfService->renderFieldSetting(['testField'], ['testConfiguration'], true);
 
-        $this->assertEquals([['testField'], ['testConfiguration'], true], $fakeAcfService->methodCalls['renderFieldSetting'][0]);
+        $this->assertEquals(
+            [['testField'], ['testConfiguration'], true],
+            $fakeAcfService->methodCalls['renderFieldSetting'][0]
+        );
     }
 
     /**
