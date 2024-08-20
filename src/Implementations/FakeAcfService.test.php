@@ -177,4 +177,16 @@ class FakeAcfServiceTest extends TestCase
         $this->assertEquals(['testSelector', 'testValue', 123], $fakeAcfService->methodCalls['updateField'][0]);
         $this->assertTrue($result);
     }
+
+    /**
+     * @testdox addOptionsSubPage()
+     */
+    public function testAddOptionsSubPage()
+    {
+        $fakeAcfService = new FakeAcfService();
+
+        $fakeAcfService->addOptionsSubPage(['testOptions']);
+
+        $this->assertEquals([['testOptions']], $fakeAcfService->methodCalls['addOptionsSubPage'][0]);
+    }
 }
