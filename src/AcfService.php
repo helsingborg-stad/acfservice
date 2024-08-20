@@ -7,6 +7,7 @@ use AcfService\Contracts;
 interface AcfService extends
     Contracts\AddLocalFieldGroup,
     Contracts\AddOptionsPage,
+    Contracts\AddOptionsSubPage,
     Contracts\EnqueueUploader,
     Contracts\Form,
     Contracts\FormHead,

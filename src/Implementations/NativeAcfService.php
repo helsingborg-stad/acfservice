@@ -93,4 +93,12 @@ class NativeAcfService implements AcfService
     {
         return update_field($selector, $value, $postId);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function addOptionsSubPage(array $options): void
+    {
+        acf_add_options_sub_page($options);
+    }
 }
