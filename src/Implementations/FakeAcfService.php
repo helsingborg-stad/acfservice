@@ -153,4 +153,13 @@ class FakeAcfService implements AcfService
     {
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function acfGetFields(string|array $parent): array
+    {
+        $this->registerFunctionCall(__FUNCTION__, func_get_args());
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), []);
+    }
 }

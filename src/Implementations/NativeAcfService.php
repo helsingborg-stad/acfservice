@@ -101,4 +101,12 @@ class NativeAcfService implements AcfService
     {
         acf_add_options_sub_page($options);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function acfGetFields(string|array $parent): array
+    {
+        return acf_get_fields($parent);
+    }
 }
