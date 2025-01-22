@@ -189,4 +189,16 @@ class FakeAcfServiceTest extends TestCase
 
         $this->assertEquals([['testOptions']], $fakeAcfService->methodCalls['addOptionsSubPage'][0]);
     }
+
+    /**
+     * @testdox acfGetFields()
+     */
+    public function testAcfGetFields() 
+    {
+        $fakeAcfService = new FakeAcfService();
+
+        $fakeAcfService->acfGetFields('testParent');
+
+        $this->assertEquals(['testParent'], $fakeAcfService->methodCalls['acfGetFields'][0]);
+    }
 }
