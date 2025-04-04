@@ -95,7 +95,7 @@ class NativeAcfServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @testdox acfGetFields() returns array of fields
      */
-    public function testAcfGetFields() 
+    public function testAcfGetFields()
     {
         function acf_get_fields($group)
         {
