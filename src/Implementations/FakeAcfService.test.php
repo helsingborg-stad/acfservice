@@ -193,7 +193,7 @@ class FakeAcfServiceTest extends TestCase
     /**
      * @testdox acfGetFields()
      */
-    public function testAcfGetFields() 
+    public function testAcfGetFields()
     {
         $fakeAcfService = new FakeAcfService();
 

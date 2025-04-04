@@ -91,4 +91,33 @@ class NativeAcfServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('qux', $call['configuration']['baz']);
         $this->assertEquals(true, $call['global']);
     }
+
+    /**
+     * @testdox acfGetFields() returns array of fields
+     */
+    public function testAcfGetFields()
+    {
+        function acf_get_fields($group)
+        {
+            return [
+                [
+                    'key'   => 'field_123abc',
+                    'label' => 'Example Field',
+                    'name'  => 'example_field',
+                    'type'  => 'text',
+                    'value' => 'Sample Value',
+                ]
+            ];
+        }
+
+        $acfService = new NativeAcfService();
+
+        $result = $acfService->acfGetFields('testParent');
+        $this->assertIsArray($result);
+        $this->assertEquals('field_123abc', $result[0]['key']);
+        $this->assertEquals('Example Field', $result[0]['label']);
+        $this->assertEquals('example_field', $result[0]['name']);
+        $this->assertEquals('text', $result[0]['type']);
+        $this->assertEquals('Sample Value', $result[0]['value']);
+    }
 }
