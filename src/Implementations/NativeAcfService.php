@@ -109,4 +109,12 @@ class NativeAcfService implements AcfService
     {
         return acf_get_fields($parent);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function deleteField($selector, $postId = false): bool
+    {
+        return delete_field($selector, $postId);
+    }
 }

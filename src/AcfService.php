@@ -9,6 +9,7 @@ interface AcfService extends
     Contracts\AddLocalFieldGroup,
     Contracts\AddOptionsPage,
     Contracts\AddOptionsSubPage,
+    Contracts\DeleteField,
     Contracts\EnqueueUploader,
     Contracts\Form,
     Contracts\FormHead,

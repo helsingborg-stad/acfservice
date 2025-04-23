@@ -201,4 +201,17 @@ class FakeAcfServiceTest extends TestCase
 
         $this->assertEquals(['testParent'], $fakeAcfService->methodCalls['acfGetFields'][0]);
     }
+
+    /**
+     * @testdox deleteField()
+     */
+    public function testDeleteField()
+    {
+        $fakeAcfService = new FakeAcfService(['deleteField' => true]);
+
+        $result = $fakeAcfService->deleteField('testSelector', 123);
+
+        $this->assertEquals(['testSelector', 123], $fakeAcfService->methodCalls['deleteField'][0]);
+        $this->assertTrue($result);
+    }
 }
