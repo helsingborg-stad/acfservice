@@ -16,6 +16,7 @@ interface AcfService extends
     Contracts\GetField,
     Contracts\GetFieldGroups,
     Contracts\GetFields,
+    Contracts\GetFieldObject,
     Contracts\RenderFieldSetting,
     Contracts\UpdateField
 {
