@@ -171,4 +171,17 @@ class FakeAcfService implements AcfService
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
         return $this->getReturnValue(__FUNCTION__, func_get_args(), true);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFieldObject(
+        string $selector,
+        int|false|string $postId = false,
+        bool $formatValue = true,
+        bool $escapeHtml = false
+    ): array|false {
+        $this->registerFunctionCall(__FUNCTION__, func_get_args());
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), false);
+    }
 }

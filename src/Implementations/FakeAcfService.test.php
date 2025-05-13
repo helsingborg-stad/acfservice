@@ -214,4 +214,20 @@ class FakeAcfServiceTest extends TestCase
         $this->assertEquals(['testSelector', 123], $fakeAcfService->methodCalls['deleteField'][0]);
         $this->assertTrue($result);
     }
+
+    /**
+     * @testdox getFieldObject()
+     */
+    public function testGetFieldObject()
+    {
+        $returnCallback = fn ($selector, $postId) =>
+            $postId === 123 && $selector === 'testSelector' ? ['testFieldObject'] : false;
+
+        $fakeAcfService = new FakeAcfService(['getFieldObject' => $returnCallback]);
+
+        $result = $fakeAcfService->getFieldObject('testSelector', 123);
+
+        $this->assertEquals(['testSelector', 123], $fakeAcfService->methodCalls['getFieldObject'][0]);
+        $this->assertEquals(['testFieldObject'], $result);
+    }
 }
