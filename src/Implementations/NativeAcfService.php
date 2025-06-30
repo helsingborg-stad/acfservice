@@ -122,6 +122,14 @@ class NativeAcfService implements AcfService
     /**
      * @inheritDoc
      */
+    public function acfValidateValue($value, $field, $input): bool
+    {
+        return acf_validate_value($value, $field, $input);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function deleteField($selector, $postId = false): bool
     {
         return delete_field($selector, $postId);

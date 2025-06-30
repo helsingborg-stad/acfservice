@@ -157,6 +157,15 @@ class FakeAcfService implements AcfService
     /**
      * @inheritDoc
      */
+    public function acfValidateValue($value, $field, $input): bool
+    {
+        $this->registerFunctionCall(__FUNCTION__, func_get_args());
+        return $this->getReturnValue(__FUNCTION__, func_get_args(), []);
+    }
+  
+    /**
+     * @inheritDoc
+     */
     public function acfGetField(int|string $id = 0): array
     {
         $this->registerFunctionCall(__FUNCTION__, func_get_args());
